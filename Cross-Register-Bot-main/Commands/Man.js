@@ -19,8 +19,8 @@ module.exports.run = async(client, message, args, embed) => {
     if (member.user.bot) return message.channel.send(embed.setDescription(`${message.member}, Kayıt ettiğin kullanıcı bir bot olamaz.`)).sil(7)
     if (member.id === message.author.id) return message.channel.send(embed.setDescription(`${member}, Kendini kayıt edemezsin.`)).sil(7)
     let data = await registerData.findOne({ guildID: message.guild.id })
-    if (data && data.tagMode === true) {
-        if (ayar.guild.tagges.some(s => !member.user.tag.toLowerCase().includes(s)) && !member.roles.cache.has(ayar.roles.vipRole) && !member.roles.cache.has(ayar.roles.boosterRole)) return message.channel.send(embed.setDescription(`${member}, Adlı kullanıcıda tag bulunmadığı için işlem gerçekleştirilemedi.`)).sil(7);
+ if (data && data.tagMode === true) {
+        if (!ayar.guild.tagges.some(s => !member.user.username.includes(s) && !member.user.discriminator.includes(s) && !member.user.tag.includes(s)) && !member.roles.cache.has(ayar.roles.vipRole) && !member.roles.cache.has(ayar.roles.boosterRole)) return message.channel.send(embed.setDescription(`${member}, Adlı kullanıcıda tag bulunmadığı için işlem gerçekleştirilemedi.`)).sil(7);
     }
 
     await Register.man(member, message.member, name, message.channel)
