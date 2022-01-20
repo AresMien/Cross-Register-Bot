@@ -27,7 +27,7 @@ class Register {
         new registerData({ guildID: channel.guild.id, userID: user.id, Name: name, Sex: ayar.roles.manRoles[0], Date: Date.now() }).save();
         if (!adminData) { new registerData({ guildID: channel.guild.id, userID: admin.id, Man: 1, Total: 1 }).save() } else { adminData.Man++, adminData.Total++, adminData.save(); }
         if (nameMode && nameMode.nameMode === true) { channel.send(embed.setDescription(`${user} üyesinin ismi başarıyla \`${name}\` olarak değiştirildi. Bu üye daha önce bu isimlerle kayıt olmuş. \n\n ${user.guild.emojis.cache.get(ayar.emojis.yes)} Kişinini toplamda **${data.length}** isim kayıtı bulundu. \n ${isimler} \n\n Kişinin önceki isimlerine \`.isimler @Cross/ID\` komutuyla bakarak kayıt işlemini gerçekleştirmeniz önerilir.`)).sil(10); } else { channel.send(embed.setDescription(`${user} üyesine ${user.guild.roles.cache.get(ayar.roles.manRoles[0])} rolü verildi.`)).sil(7); }
-        if (ayar.guild.tagges.some(s => user.user.tag.toLowerCase().includes(s))) user.roles.add(ayar.roles.tagRole)
+        if (ayar.guild.tagges.some(s => user.user.username.includes(s) || user.user.discriminator.includes(s) || user.user.tag.includes(s))) user.roles.add(ayar.roles.tagRole)
     }
 
     static async woman(user, admin, name, channel) {
@@ -43,7 +43,7 @@ class Register {
         if (!adminData) { new registerData({ guildID: channel.guild.id, userID: admin.id, Woman: 1, Total: 1 }).save() } else { adminData.Woman++, adminData.Total++, adminData.save(); }
 
         if (nameMode && nameMode.nameMode === true) { channel.send(embed.setDescription(`${user} üyesinin ismi başarıyla \`${name}\` olarak değiştirildi. Bu üye daha önce bu isimlerle kayıt olmuş. \n\n ${user.guild.emojis.cache.get(ayar.emojis.yes)} Kişinini toplamda **${data.length}** isim kayıtı bulundu. \n ${isimler} \n\n Kişinin önceki isimlerine \`.isimler @Cross/ID\` komutuyla bakarak kayıt işlemini gerçekleştirmeniz önerilir.`)).sil(10); } else { channel.send(embed.setDescription(`${user} üyesine ${user.guild.roles.cache.get(ayar.roles.womanRoles[0])} rolü verildi.`)).sil(7); }
-        if (ayar.guild.tagges.some(s => user.user.tag.toLowerCase().includes(s))) user.roles.add(ayar.roles.tagRole)
+        if (ayar.guild.tagges.some(s => user.user.username.includes(s) || user.user.discriminator.includes(s) || user.user.tag.includes(s))) user.roles.add(ayar.roles.tagRole)
     }
 
     static fixname(member, isim, yaş) {
